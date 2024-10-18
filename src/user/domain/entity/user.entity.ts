@@ -3,6 +3,7 @@ import UserValidator from '../validator/user.validator';
 import NotificationError from 'src/@shared/notification/notification.error';
 
 type UserProps = {
+  id?: string;
   name: string;
   email: string;
   password: string;
@@ -14,7 +15,7 @@ export class User extends EntityBase {
   private _password: string;
 
   constructor(userProps: UserProps) {
-    super();
+    super(userProps.id);
     this._name = userProps.name;
     this._email = userProps.email;
     this._password = userProps.password;
