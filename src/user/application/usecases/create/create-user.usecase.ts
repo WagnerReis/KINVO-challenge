@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { UserDTO, UserOutput } from 'user/application/dto/create-user.dto';
+import {
+  CreateUserDTO,
+  CreateUserOutputDTO,
+} from 'user/application/dto/create-user.dto';
 import { UserFactory } from 'user/domain/factories/user.factory';
 import { IUserRepository } from 'user/domain/repository/user.repository';
 import { UserAlreadyExistsException } from 'user/domain/exceptions/user-exceptions';
@@ -12,7 +15,7 @@ export class CreateUserUseCase {
     private passwordService: IPasswordService,
   ) {}
 
-  async execute(user: UserDTO): Promise<UserOutput> {
+  async execute(user: CreateUserDTO): Promise<CreateUserOutputDTO> {
     await this.ensureUserDoesNotExists(user.email);
 
     const hash = await this.passwordService.hash(user.password);

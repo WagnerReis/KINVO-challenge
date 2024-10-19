@@ -1,11 +1,11 @@
 import {
-  UserDTO,
-  UserPersistenceDTO,
+  CreateUserDTO,
+  CreateUserPersistenceDTO,
 } from 'user/application/dto/create-user.dto';
 import { User } from '../entity/user.entity';
 
 export class UserFactory {
-  static createFromPersistence(data: UserPersistenceDTO): User {
+  static createFromPersistence(data: CreateUserPersistenceDTO): User {
     return new User({
       id: data.id,
       name: data.name,
@@ -14,7 +14,7 @@ export class UserFactory {
     });
   }
 
-  static createNew(user: UserDTO): User {
+  static createNew(user: CreateUserDTO): User {
     return new User({
       id: user.id,
       name: user.name,

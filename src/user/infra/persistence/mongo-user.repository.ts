@@ -5,7 +5,7 @@ import { User } from '../../domain/entity/user.entity';
 import { User as UserModel, UserDocument } from './schemas/user.schema';
 import { IUserRepository } from 'user/domain/repository/user.repository';
 import { UserFactory } from 'user/domain/factories/user.factory';
-import { UserDTO } from 'user/application/dto/create-user.dto';
+import { CreateUserDTO } from 'user/application/dto/create-user.dto';
 
 @Injectable()
 export class MongoUserRepository implements IUserRepository {
@@ -27,7 +27,7 @@ export class MongoUserRepository implements IUserRepository {
     );
   }
 
-  async create(user: User): Promise<User> {
+  async create(user: CreateUserDTO): Promise<User> {
     const createdUser = new this.userModel(user);
     const savedUser = await createdUser.save();
     return UserFactory.createFromPersistence(this.toPlainObject(savedUser));
@@ -47,7 +47,7 @@ export class MongoUserRepository implements IUserRepository {
       : null;
   }
 
-  private toPlainObject(document: UserDocument): UserDTO {
+  private toPlainObject(document: UserDocument): CreateUserDTO {
     const { id, name, email, password } = document;
     return { id, name, email, password };
   }
