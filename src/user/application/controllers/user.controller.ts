@@ -1,34 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from '../../user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
+import { UserDTO, UserOutput } from '../dto/create-user.dto';
+import { CreateUserUseCase } from '../usecases/create/create-user.usecase';
+import { UserAlreadyExistsException } from 'user/domain/exceptions/user-exceptions';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  async create(@Body() createUserDto: UserDTO): Promise<UserOutput> {
+    try {
+      const user = await this.createUserUseCase.execute(createUserDto);
+      return user;
+    } catch (error) {
+      if (error instanceof UserAlreadyExistsException) {
+        throw new HttpException(error.message, HttpStatus.CONFLICT);
+      }
+      throw error;
+    }
   }
 }
