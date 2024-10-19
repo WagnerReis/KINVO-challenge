@@ -8,6 +8,7 @@ import { MongoUserRepository } from 'user/infra/persistence/mongo-user.repositor
 import { BcryptPasswordService } from 'user/infra/services/bcrypt-password.service';
 import { IPasswordService } from 'user/domain/services/password-service.interface';
 import { CreateUserUseCase } from './usecases/create/create-user.usecase';
+import { FindUserByEmailUseCase } from './usecases/find-by-email/find-user-by-email.usecase';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CreateUserUseCase } from './usecases/create/create-user.usecase';
       useClass: BcryptPasswordService,
     },
     CreateUserUseCase,
+    FindUserByEmailUseCase,
   ],
 })
 export class UserModule {}

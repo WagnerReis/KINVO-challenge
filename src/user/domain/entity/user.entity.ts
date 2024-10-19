@@ -46,4 +46,14 @@ export class User extends EntityBase {
   private validate() {
     new UserValidator().validate(this);
   }
+
+  public toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
