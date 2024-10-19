@@ -13,12 +13,16 @@ export class User extends EntityBase {
   private _name: string;
   private _email: string;
   private _password: string;
+  public createdAt: Date;
+  public updatedAt: Date;
 
   constructor(userProps: UserProps) {
     super(userProps.id);
     this._name = userProps.name;
     this._email = userProps.email;
     this._password = userProps.password;
+    this.createdAt = this.createdAt || new Date();
+    this.updatedAt = this.updatedAt || new Date();
 
     this.validate();
 
