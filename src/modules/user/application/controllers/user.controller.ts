@@ -8,15 +8,15 @@ import {
   Query,
 } from '@nestjs/common';
 import { CreateUserUseCase } from '../usecases/create/create-user.usecase';
-import {
-  UserAlreadyExistsException,
-  UserEmailNotFoundException,
-} from 'user/domain/exceptions/user-exceptions';
 import { CreateUserDTO } from '../dto/create-user.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserOutputDTO } from '../dto/user-output.dto';
 import { FindUserByEmailUseCase } from '../usecases/find-by-email/find-user-by-email.usecase';
 import { FindUserByEmailDTO } from '../dto/find-user-by-email.dto';
+import {
+  UserAlreadyExistsException,
+  UserEmailNotFoundException,
+} from '../../domain/exceptions/user-exceptions';
 
 @Controller('users')
 @ApiTags('Users')

@@ -1,5 +1,5 @@
-import { IPasswordService } from 'user/domain/services/password-service.interface';
 import * as bcrypt from 'bcrypt';
+import { IPasswordService } from '../../domain/services/password-service.interface';
 
 export class BcryptPasswordService implements IPasswordService {
   private saltOrRounds = 10;

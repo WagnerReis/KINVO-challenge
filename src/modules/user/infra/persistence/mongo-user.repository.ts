@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from '../../domain/entity/user.entity';
 import { User as UserModel, UserDocument } from './schemas/user.schema';
-import { IUserRepository } from 'user/domain/repository/user.repository';
-import { UserFactory } from 'user/domain/factories/user.factory';
-import { CreateUserDTO } from 'user/application/dto/create-user.dto';
+import { IUserRepository } from '../../domain/repository/user.repository';
+import { UserFactory } from '../../domain/factories/user.factory';
+import { CreateUserDTO } from '../../application/dto/create-user.dto';
 
 @Injectable()
 export class MongoUserRepository implements IUserRepository {

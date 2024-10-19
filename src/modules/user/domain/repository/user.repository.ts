@@ -1,4 +1,4 @@
-import { CreateUserDTO } from 'user/application/dto/create-user.dto';
+import { CreateUserDTO } from '../../application/dto/create-user.dto';
 import { User } from '../entity/user.entity';
 
 export abstract class IUserRepository {

@@ -17,7 +17,7 @@ export class User extends EntityBase {
   public updatedAt: Date;
 
   constructor(userProps: UserProps) {
-    super(userProps.id);
+    super(userProps?.id);
     this._name = userProps.name;
     this._email = userProps.email;
     this._password = userProps.password;

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDTO } from 'user/application/dto/create-user.dto';
-import { UserFactory } from 'user/domain/factories/user.factory';
-import { IUserRepository } from 'user/domain/repository/user.repository';
-import { UserAlreadyExistsException } from 'user/domain/exceptions/user-exceptions';
-import { IPasswordService } from 'user/domain/services/password-service.interface';
-import { UserOutputDTO } from 'user/application/dto/user-output.dto';
 import { FindUserByEmailUseCase } from '../find-by-email/find-user-by-email.usecase';
+import { IUserRepository } from 'src/modules/user/domain/repository/user.repository';
+import { IPasswordService } from 'src/modules/user/domain/services/password-service.interface';
+import { CreateUserDTO } from '../../dto/create-user.dto';
+import { UserOutputDTO } from '../../dto/user-output.dto';
+import { UserFactory } from 'src/modules/user/domain/factories/user.factory';
+import { UserAlreadyExistsException } from 'src/modules/user/domain/exceptions/user-exceptions';
 
 @Injectable()
 export class CreateUserUseCase {

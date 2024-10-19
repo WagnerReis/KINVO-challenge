@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './controllers/user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User } from 'user/domain/entity/user.entity';
-import { UserSchema } from 'user/infra/persistence/schemas/user.schema';
-import { IUserRepository } from 'user/domain/repository/user.repository';
-import { MongoUserRepository } from 'user/infra/persistence/mongo-user.repository';
-import { BcryptPasswordService } from 'user/infra/services/bcrypt-password.service';
-import { IPasswordService } from 'user/domain/services/password-service.interface';
+import { UserController } from './controllers/user.controller';
 import { CreateUserUseCase } from './usecases/create/create-user.usecase';
 import { FindUserByEmailUseCase } from './usecases/find-by-email/find-user-by-email.usecase';
+import { MongoUserRepository } from '../infra/persistence/mongo-user.repository';
+import { IUserRepository } from '../domain/repository/user.repository';
+import { IPasswordService } from '../domain/services/password-service.interface';
+import { BcryptPasswordService } from '../infra/services/bcrypt-password.service';
+import { User } from '../domain/entity/user.entity';
+import { UserSchema } from '../infra/persistence/schemas/user.schema';
 
 @Module({
   imports: [
@@ -27,5 +27,6 @@ import { FindUserByEmailUseCase } from './usecases/find-by-email/find-user-by-em
     CreateUserUseCase,
     FindUserByEmailUseCase,
   ],
+  exports: [IUserRepository, FindUserByEmailUseCase, MongooseModule],
 })
 export class UserModule {}

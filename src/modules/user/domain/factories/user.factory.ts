@@ -1,7 +1,7 @@
 import {
   CreateUserDTO,
   CreateUserPersistenceDTO,
-} from 'user/application/dto/create-user.dto';
+} from '../../application/dto/create-user.dto';
 import { User } from '../entity/user.entity';
 
 export class UserFactory {
