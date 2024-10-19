@@ -1,3 +1,3 @@
-export default interface IValidator<T> {
+export interface IValidator<T> {
   validate(entity: T): void;
 }

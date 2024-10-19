@@ -1,7 +1,6 @@
-import IValidator from 'src/@shared/validator/validator.interface';
+import { IValidator } from 'src/@shared/validator/validator.interface';
 import { User } from '../entity/user.entity';
 import * as yup from 'yup';
-import { create } from 'domain';
 
 export default class UserValidator implements IValidator<User> {
   validate(entity: User): void {
