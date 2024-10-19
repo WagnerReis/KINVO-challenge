@@ -9,7 +9,13 @@ import {
 } from '@nestjs/common';
 import { CreateUserUseCase } from '../usecases/create/create-user.usecase';
 import { CreateUserDTO } from '../dto/create-user.dto';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserOutputDTO } from '../dto/user-output.dto';
 import { FindUserByEmailUseCase } from '../usecases/find-by-email/find-user-by-email.usecase';
 import { FindUserByEmailDTO } from '../dto/find-user-by-email.dto';
@@ -17,6 +23,7 @@ import {
   UserAlreadyExistsException,
   UserEmailNotFoundException,
 } from '../../domain/exceptions/user-exceptions';
+import { Public } from 'src/infra/decorators/is-public.decorator';
 
 @Controller('users')
 @ApiTags('Users')
@@ -26,6 +33,7 @@ export class UserController {
     private readonly findUserByEmailUseCase: FindUserByEmailUseCase,
   ) {}
 
+  @Public()
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({
@@ -61,6 +69,7 @@ export class UserController {
     status: 404,
     description: 'User with email ... not found',
   })
+  @ApiBearerAuth()
   async findByEmail(
     @Query() query: FindUserByEmailDTO,
   ): Promise<UserOutputDTO> {
